@@ -2,7 +2,7 @@
 
 # PoseBridge: Bridging the Skeletonization Gap for Zero-Shot Skeleton-Based Action Recognition
 
-### [Sanghyeon Lee](https://sites.google.com/view/sang-hyeon-lee) · Jinwoo Kim · [Jong Taek Lee](https://sites.google.com/view/k-vislab)
+[Sanghyeon Lee](https://sites.google.com/view/sang-hyeon-lee) · Jinwoo Kim · [Jong Taek Lee](https://sites.google.com/view/k-vislab)
 
 Kyungpook National University, South Korea
 
