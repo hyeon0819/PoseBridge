@@ -1,198 +1,143 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="PoseBridge: Bridging the Skeletonization Gap for Zero-Shot Skeleton-Based Action Recognition. NeurIPS 2026." />
-  <meta name="theme-color" content="#ffffff" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="PoseBridge preserves action-relevant visual cues inside human pose estimation and bridges them to zero-shot skeleton-text alignment. NeurIPS 2026.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="PoseBridge | NeurIPS 2026">
+  <meta property="og:description" content="Bridging the Skeletonization Gap for Zero-Shot Skeleton-Based Action Recognition.">
+  <meta property="og:image" content="https://hyeon0819.github.io/PoseBridge/assets/figure1.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hyeon0819.github.io/PoseBridge/">
+  <link rel="canonical" href="https://hyeon0819.github.io/PoseBridge/">
+  <meta name="citation_title" content="PoseBridge: Bridging the Skeletonization Gap for Zero-Shot Skeleton-Based Action Recognition">
+  <meta name="citation_author" content="Sanghyeon Lee">
+  <meta name="citation_author" content="Jinwoo Kim">
+  <meta name="citation_author" content="Jong Taek Lee">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="Advances in Neural Information Processing Systems">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2605.11497v2">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
   <title>PoseBridge | NeurIPS 2026</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav" aria-label="Primary navigation">
     <div class="nav-inner">
-      <a class="brand" href="#top">PoseBridge</a>
-      <div class="nav-links">
-        <a href="#abstract">Abstract</a>
-        <a href="#method">Method</a>
-        <a href="#results">Results</a>
-        <a href="#qualitative">Analysis</a>
-        <a href="#citation">Citation</a>
-      </div>
+      <a class="brand" href="#top" aria-label="PoseBridge home"><svg width="27" height="27" viewBox="0 0 30 30" aria-hidden="true"><path d="M4 23V9m22 14V9M4 15c7 0 6-8 11-8s4 8 11 8M4 21h22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>PoseBridge<span class="nav-venue">NeurIPS ’26</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu <span aria-hidden="true">☰</span></button>
+      <div class="nav-links" id="nav-links"><a href="#problem">Problem</a><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#citation">Citation</a></div>
     </div>
   </nav>
-
-  <main id="top">
-    <header class="hero container">
-      <div class="venue-pill">NeurIPS 2026</div>
-      <h1><span class="accent">PoseBridge:</span> Bridging the Skeletonization Gap for<br class="desktop-break" /> Zero-Shot Skeleton-Based Action Recognition</h1>
-
+  <main id="main">
+    <header id="top" class="hero container">
+      <div class="venue-pill"><span class="venue-dot" aria-hidden="true"></span> NeurIPS 2026</div>
+      <h1>PoseBridge</h1>
+      <p class="paper-title">Bridging the Skeletonization Gap for<br class="desktop-break"> Zero-Shot Skeleton-Based Action Recognition</p>
       <div class="authors" aria-label="Authors">
-        <a href="https://sites.google.com/view/sang-hyeon-lee" target="_blank">Sanghyeon Lee</a>
-        <span>Jinwoo Kim</span>
-        <a href="https://sites.google.com/view/k-vislab" target="_blank">Jong Taek Lee</a>
+        <a href="https://sites.google.com/view/sang-hyeon-lee" target="_blank" rel="noopener noreferrer">Sanghyeon Lee</a>
+        <a href="https://scholar.google.co.kr/citations?user=WdOolEsAAAAJ&amp;hl=ko&amp;oi=sra" target="_blank" rel="noopener noreferrer">Jinwoo Kim</a>
+        <a href="https://sites.google.com/view/k-vislab" target="_blank" rel="noopener noreferrer">Jong Taek Lee<sup>†</sup></a>
       </div>
       <p class="affiliation">School of Computer Science and Engineering, Kyungpook National University</p>
-
+      <p class="corresponding">Daegu, South Korea <span aria-hidden="true">·</span> † Corresponding author</p>
       <div class="link-row">
-        <a class="paper-button" href="https://arxiv.org/abs/2605.11497" target="_blank" rel="noreferrer">
-          <span class="button-icon">▤</span> arXiv
-        </a>
-        <a class="paper-button" href="https://arxiv.org/pdf/2605.11497" target="_blank" rel="noreferrer">
-          <span class="button-icon">↗</span> Paper
-        </a>
-        <a class="paper-button" href="https://github.com/hyeon0819/PoseBridge" target="_blank" rel="noreferrer">
-          <span class="button-icon">⌘</span> Code
-        </a>
-        <a class="paper-button" href="#citation">
-          <span class="button-icon">“”</span> BibTeX
-        </a>
+        <a class="paper-button primary" href="assets/posebridge-paper.pdf" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H5v18h14V8zM14 3v6h5M8 13h8M8 17h6"/></svg>Paper + Appendix <span aria-hidden="true">↗</span></a>
+        <a class="paper-button" href="https://arxiv.org/abs/2605.11497" target="_blank" rel="noopener noreferrer"><span class="button-icon" aria-hidden="true">a</span>arXiv <span aria-hidden="true">↗</span></a>
+        <a class="paper-button" href="https://github.com/hyeon0819/PoseBridge" target="_blank" rel="noopener noreferrer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg>GitHub <span aria-hidden="true">↗</span></a>
+        <a class="paper-button" href="#citation"><span class="button-icon" aria-hidden="true">{ }</span>BibTeX</a>
       </div>
-
-      <p class="tldr"><strong>TL;DR</strong> PoseBridge preserves action-relevant visual semantics <em>during</em> human pose estimation and bridges them to skeleton-text alignment, reducing semantic information lost by skeletonization without adding an independent RGB action-recognition branch.</p>
-
-      <figure class="wide-figure hero-figure">
-        <img src="https://arxiv.org/html/2605.11497v1/figure1.png" alt="Motivation of PoseBridge comparing conventional skeletonize-then-align with PoseBridge" />
-        <figcaption>PoseBridge addresses the <strong>skeletonization gap</strong>: object, interaction, and pose-relative cues may become non-explicit when video is compressed into joint coordinates.</figcaption>
-      </figure>
+      <p class="resource-note">Paper: arXiv v2, September 2026 <span aria-hidden="true">·</span> Code release forthcoming</p>
+      <p class="tldr"><strong>The idea</strong> Skeleton coordinates keep motion, but can lose the cues that tell actions apart. PoseBridge preserves those cues <em>inside the pose estimator</em> and carries them into zero-shot recognition.</p>
     </header>
 
-    <section id="abstract" class="section container narrow">
-      <h2>Abstract</h2>
-      <p>
-        Zero-shot skeleton-based action recognition (ZSSAR) is commonly formulated as skeleton-text alignment, but this alignment begins only after raw visual observations have already been compressed into joint coordinates. PoseBridge targets the resulting <strong>skeletonization gap</strong>: action-relevant object, interaction, and pose-relative cues that are no longer explicit in the skeleton sequence.
-      </p>
-      <p>
-        We reinterpret intermediate human pose estimation (HPE) representations as <strong>pose-anchored semantic cues</strong>. These cues are preserved within HPE through hierarchical refinement and body-aware pooling, then transferred to ZSSAR through a skeleton-conditioned semantic bridge and semantic prototype adaptation. PoseBridge uses the same HPE process that produces skeletons, without an independent RGB action-recognition backbone or external object detector.
-      </p>
+    <section id="problem" class="section problem-section container">
+      <div class="section-heading"><span class="eyebrow">01 / THE PROBLEM</span><h2>Similar motion. Different actions.</h2><p>Putting on a hat, headphones, or glasses can produce similar hand-to-head trajectories. Joint coordinates alone do not make the object and its interaction with the body explicit.</p></div>
+      <figure class="wide-figure hero-figure">
+        <button class="figure-button" data-figure="assets/figure1.png" data-title="The skeletonization gap" aria-label="Enlarge Figure 1: The skeletonization gap"><img src="assets/figure1.png" width="1758" height="685" alt="Conventional skeleton-text alignment loses object cues during pose estimation. PoseBridge preserves pose-anchored semantics to distinguish a hat, headphones, and glasses." fetchpriority="high"><span class="zoom-hint" aria-hidden="true">↗ Enlarge figure</span></button>
+        <figcaption><span class="figure-label">Figure 1</span> The <strong>skeletonization gap</strong> begins before skeleton-text alignment. PoseBridge reuses intermediate features from the same pose estimation process to retain action-relevant evidence.</figcaption>
+      </figure>
+      <div class="takeaway"><span class="takeaway-marker" aria-hidden="true">↳</span><p><strong>Bridge the information loss at its source.</strong> Use the pose estimator as a source of body-grounded semantics, alongside the skeletons it already produces.</p></div>
+      <details class="abstract"><summary>Read the abstract <span aria-hidden="true">+</span></summary><div class="abstract-body"><p>Zero-shot skeleton-based action recognition (ZSSAR) is typically treated as a skeleton-text alignment problem: encode joint-coordinate sequences, align them with language, and classify unseen actions. We argue that this alignment is often too late. Skeletons are not complete action observations, but compressed outputs of human pose estimation (HPE); by the time alignment begins, human-object interactions and pose-relative visual cues may no longer be explicit. We call this upstream semantic loss.</p><p>To address it, we propose PoseBridge, an HPE-aware ZSSAR framework that bridges intermediate HPE representations to skeleton-text alignment. Rather than adding an RGB action branch or object detector, PoseBridge extracts pose-anchored semantic cues from the same HPE process that produces skeletons, then transfers them through skeleton-conditioned bridging and semantic prototype adaptation.</p><p>Across NTU-RGB+D 60/120, PKU-MMD, and Kinetics-200/400, PoseBridge improves ZSSAR performance under the evaluated protocols. On the Kinetics-200/400 PURLS benchmark, which contains in-the-wild videos with diverse scenes and action contexts, PoseBridge shows the clearest separation, improving the strongest compared baseline by 13.3–17.4 points across all eight splits. Our code will be publicly released.</p></div></details>
     </section>
 
     <section id="method" class="section soft-bg">
       <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">METHOD</span>
-          <h2>Preserve semantics before they disappear</h2>
-          <p>PoseBridge consists of two coupled stages: semantic preservation within HPE, followed by semantic transfer to zero-shot skeleton-text alignment.</p>
-        </div>
-
+        <div class="section-heading"><span class="eyebrow">02 / THE METHOD</span><h2>Preserve first. Then bridge.</h2><p>Two coupled stages carry pose-anchored semantics from human pose estimation into skeleton-text alignment.</p></div>
         <article class="method-block">
-          <div class="method-copy">
-            <div class="step-number">01</div>
-            <h3>Pose-anchored semantics within HPE</h3>
-            <p><strong>Hierarchical refinement</strong> carries fine-grained visual evidence from shallow HPE layers into deeper pose-structured features. <strong>Body-aware pooling</strong> then aggregates responses around the predicted body, while semantic alignment encourages the representation to retain action-relevant evidence.</p>
-          </div>
-          <figure class="method-figure">
-            <img src="https://arxiv.org/html/2605.11497v1/figure_HPE.png" alt="PoseBridge HPE stage with hierarchical refinement and body-aware pooling" />
-          </figure>
+          <div class="method-copy"><span class="step-number">STAGE 01 · WITHIN HPE</span><h3>Keep the visual evidence<br>around the body.</h3><p><strong>Hierarchical refinement</strong> injects fine-grained shallow features into deeper pose-structured features. <strong>Body-aware pooling</strong> selects cues around predicted joints.</p><p>Caption-based semantic alignment encourages these cues to retain action-relevant meaning while preserving the pose estimation objective.</p><div class="stage-output"><span>OUTPUT</span> Skeletons + pose-anchored semantic cues</div></div>
+          <figure class="method-figure"><button class="figure-button" data-figure="assets/figure_HPE.png" data-title="Stage 1: Learning pose-anchored semantics" aria-label="Enlarge Figure 2: Learning pose-anchored semantics"><img src="assets/figure_HPE.png" width="731" height="653" loading="lazy" alt="Multi-level pose estimator features undergo hierarchical refinement and body-aware pooling, then align with caption features from a frozen text encoder."><span class="zoom-hint" aria-hidden="true">↗ Enlarge figure</span></button><figcaption><span class="figure-label">Figure 2</span> Semantic preservation within HPE.</figcaption></figure>
         </article>
-
-        <article class="method-block reverse">
-          <div class="method-copy">
-            <div class="step-number">02</div>
-            <h3>Bridge HPE semantics to ZSSAR</h3>
-            <p>The <strong>skeleton-conditioned semantic bridge</strong> lets the skeleton representation query temporal pose-anchored cues. <strong>Semantic prototype adaptation</strong> calibrates language prototypes toward the pose-semantic space while keeping text as the zero-shot anchor.</p>
-          </div>
-          <figure class="method-figure">
-            <img src="https://arxiv.org/html/2605.11497v1/figure_ZSSAR.png" alt="PoseBridge ZSSAR stage with semantic bridge and prototype adaptation" />
-          </figure>
+        <article class="method-stage-two">
+          <div class="method-two-heading"><div><span class="step-number">STAGE 02 · ZERO-SHOT RECOGNITION</span><h3>Connect motion and meaning.</h3></div><p>The frozen pose estimator supplies skeletons and cached semantic cues. A <strong>skeleton-conditioned bridge</strong> lets motion query the temporal cues; <strong>prototype adaptation</strong> brings language targets closer to the pose-semantic space.</p></div>
+          <figure class="wide-figure"><button class="figure-button" data-figure="assets/figure_ZSSAR.png" data-title="Stage 2: Bridging to skeleton-text alignment" aria-label="Enlarge Figure 3: The semantic bridge and prototype adaptation"><img src="assets/figure_ZSSAR.png" width="1247" height="525" loading="lazy" alt="Skeleton features query pose-anchored cues using cross-attention. Seen-class pose centroids adapt text prototypes; shifts from related seen classes adapt unseen prototypes."><span class="zoom-hint" aria-hidden="true">↗ Enlarge figure</span></button><figcaption><span class="figure-label">Figure 3</span> The bridge enriches the recognition query, while prototype adaptation calibrates its semantic targets.</figcaption></figure>
         </article>
+        <div class="protocol"><strong>The recognition setting</strong><p>PoseBridge uses skeletons, intermediate HPE cues, and text. The same pose estimation pass provides both visual outputs; an independent RGB action backbone or object detector is not needed. Unseen-class prototypes use shifts learned from related seen classes, with no unseen visual samples.</p></div>
       </div>
     </section>
 
     <section id="results" class="section container">
-      <div class="section-heading">
-        <span class="eyebrow">RESULTS</span>
-        <h2>Strong zero-shot recognition, lightweight inference</h2>
-        <p>PoseBridge is evaluated on NTU-RGB+D 60/120, PKU-MMD, and Kinetics-200/400, with its largest margins on the in-the-wild Kinetics benchmarks.</p>
+      <div class="section-heading"><span class="eyebrow">03 / MAIN RESULTS</span><h2>The clearest gains are in the wild.</h2><p>Evaluated on five benchmarks: NTU-RGB+D 60/120, PKU-MMD, and Kinetics-200/400.</p></div>
+      <div class="results-intro"><div class="lead-stat"><strong>+13.3–17.4<span>pp</span></strong><p>over the strongest compared baseline<br>across all eight Kinetics ZSL splits</p></div><div class="result-summary"><p><strong>55.6%</strong> on Kinetics-200 <span>180 seen / 20 unseen</span></p><p><strong>52.3%</strong> on Kinetics-400 <span>360 seen / 40 unseen</span></p></div></div>
+      <div class="result-tabs" role="tablist" aria-label="Result benchmarks"><button type="button" role="tab" id="tab-kinetics" aria-selected="true" aria-controls="panel-kinetics" tabindex="0">Kinetics-200/400</button><button type="button" role="tab" id="tab-ntu" aria-selected="false" aria-controls="panel-ntu" tabindex="-1">NTU60/120</button><button type="button" role="tab" id="tab-random" aria-selected="false" aria-controls="panel-random" tabindex="-1">Random splits</button><button type="button" role="tab" id="tab-efficiency" aria-selected="false" aria-controls="panel-efficiency" tabindex="-1">Efficiency</button></div>
+      <div class="result-panel" id="panel-kinetics" role="tabpanel" aria-labelledby="tab-kinetics" tabindex="0">
+        <div class="panel-title"><h3>Kinetics-200/400</h3><span>ZSL top-1 accuracy (%) ↑ · Paper Table 3</span></div>
+        <p class="panel-description">In-the-wild recognition under the PURLS benchmark. Split labels denote seen / unseen classes.</p>
+        <div class="table-wrap" role="region" aria-label="Kinetics accuracy table, scroll horizontally for all splits" tabindex="0"><table><caption class="sr-only">Kinetics-200 and Kinetics-400 zero-shot top-1 accuracy</caption><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="4" scope="colgroup">Kinetics-200</th><th colspan="4" scope="colgroup">Kinetics-400</th></tr><tr><th scope="col">180/20</th><th scope="col">160/40</th><th scope="col">140/60</th><th scope="col">120/80</th><th scope="col">360/40</th><th scope="col">320/80</th><th scope="col">300/100</th><th scope="col">280/120</th></tr></thead><tbody>
+          <tr><th scope="row">DeVISE</th><td>22.2</td><td>12.3</td><td>8.0</td><td>5.7</td><td>18.4</td><td>10.2</td><td>9.5</td><td>8.3</td></tr>
+          <tr><th scope="row">ReViSE</th><td>25.0</td><td>13.3</td><td>8.1</td><td>6.2</td><td>20.8</td><td>11.8</td><td>9.5</td><td>8.2</td></tr>
+          <tr><th scope="row">PURLS</th><td>26.0</td><td>15.9</td><td>10.2</td><td>7.8</td><td>22.5</td><td>15.1</td><td>11.4</td><td>11.0</td></tr>
+          <tr><th scope="row">PURLS*</th><td>32.2</td><td>22.6</td><td>12.0</td><td>11.8</td><td>34.5</td><td>24.3</td><td>17.0</td><td>14.3</td></tr>
+          <tr><th scope="row">TDSM</th><td>38.2</td><td>24.4</td><td>15.3</td><td>13.1</td><td>38.9</td><td>26.2</td><td>18.5</td><td>16.1</td></tr>
+          <tr class="ours"><th scope="row">PoseBridge</th><td>55.6</td><td>38.3</td><td>28.6</td><td>26.4</td><td>52.3</td><td>39.6</td><td>32.9</td><td>32.1</td></tr>
+          <tr class="gain"><th scope="row">Gain vs. TDSM</th><td>+17.4</td><td>+13.9</td><td>+13.3</td><td>+13.3</td><td>+13.4</td><td>+13.4</td><td>+14.4</td><td>+16.0</td></tr>
+        </tbody></table></div><p class="table-note">* Multiple text prompts. Other rows, including PoseBridge, use a single prompt. Gains are percentage points.</p>
       </div>
-
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-value">55.6</div><div class="stat-label">Kinetics-200<br><span>180/20 split</span></div></div>
-        <div class="stat-card"><div class="stat-value">52.3</div><div class="stat-label">Kinetics-400<br><span>360/40 split</span></div></div>
-        <div class="stat-card"><div class="stat-value">7.3</div><div class="stat-label">GFLOPs<br><span>ZSSAR stage</span></div></div>
-        <div class="stat-card"><div class="stat-value">1398</div><div class="stat-label">FPS<br><span>RTX A6000</span></div></div>
+      <div class="result-panel" id="panel-ntu" role="tabpanel" aria-labelledby="tab-ntu" tabindex="0" hidden>
+        <div class="panel-title"><h3>NTU-RGB+D 60/120</h3><span>Standard Xsub splits · Paper Table 1</span></div><p class="panel-description">ZSL top-1 accuracy (%) and GZSL harmonic mean H (%). Selected recent comparisons from the paper.</p>
+        <div class="table-wrap" role="region" aria-label="NTU standard-split results, scroll horizontally for all splits" tabindex="0"><table><caption class="sr-only">NTU60 and NTU120 standard-split ZSL and GZSL results</caption><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">NTU60 · 55/5</th><th colspan="2" scope="colgroup">NTU60 · 48/12</th><th colspan="2" scope="colgroup">NTU120 · 110/10</th><th colspan="2" scope="colgroup">NTU120 · 96/24</th></tr><tr><th scope="col">ZSL</th><th scope="col">H</th><th scope="col">ZSL</th><th scope="col">H</th><th scope="col">ZSL</th><th scope="col">H</th><th scope="col">ZSL</th><th scope="col">H</th></tr></thead><tbody>
+          <tr><th scope="row">SCoPLe</th><td>84.1</td><td>70.8</td><td>53.0</td><td>57.9</td><td>74.5</td><td>62.3</td><td>52.2</td><td>52.2</td></tr><tr><th scope="row">Neuron</th><td>86.9</td><td>71.4</td><td>62.7</td><td>59.1</td><td>71.5</td><td>63.3</td><td>57.1</td><td>53.6</td></tr><tr><th scope="row">TDSM</th><td>86.5</td><td>—</td><td>56.0</td><td>—</td><td>74.2</td><td>—</td><td>65.1</td><td>—</td></tr><tr><th scope="row">FS-VAE</th><td>86.9</td><td>75.7</td><td>57.2</td><td>52.1</td><td>74.4</td><td>63.3</td><td>62.5</td><td>54.7</td></tr><tr><th scope="row">BSZSL†</th><td>83.0</td><td>78.0</td><td>53.0</td><td>48.8</td><td>77.7</td><td>75.8</td><td>56.1</td><td>61.6</td></tr><tr><th scope="row">SKI-VLM†</th><td>82.2</td><td>—</td><td>52.0</td><td>—</td><td>77.5</td><td>—</td><td>59.3</td><td>—</td></tr><tr class="ours"><th scope="row">PoseBridge</th><td>88.8</td><td>83.0</td><td>73.2</td><td>68.0</td><td>80.3</td><td>68.0</td><td>70.9</td><td>62.6</td></tr>
+        </tbody></table></div><p class="table-note">† Additional RGB pathway with a pretrained CLIP visual encoder. “—” means unreported. PoseBridge leads ZSL in all four standard splits and GZSL-H among compared methods without an extra RGB pathway.</p>
       </div>
-
-      <div class="result-panel">
-        <div class="panel-title">
-          <h3>Kinetics-200/400</h3>
-          <span>PURLS ZSL benchmark</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th rowspan="2">Method</th><th colspan="4">Kinetics-200</th><th colspan="4">Kinetics-400</th></tr>
-              <tr><th>180/20</th><th>160/40</th><th>140/60</th><th>120/80</th><th>360/40</th><th>320/80</th><th>300/100</th><th>280/120</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>PURLS</td><td>26.0</td><td>15.9</td><td>10.2</td><td>7.8</td><td>22.5</td><td>15.1</td><td>11.4</td><td>11.0</td></tr>
-              <tr><td>PURLS*</td><td>32.2</td><td>22.6</td><td>12.0</td><td>11.8</td><td>34.5</td><td>24.3</td><td>17.0</td><td>14.3</td></tr>
-              <tr><td>TDSM</td><td>38.2</td><td>24.4</td><td>15.3</td><td>13.1</td><td>38.9</td><td>26.2</td><td>18.5</td><td>16.1</td></tr>
-              <tr class="ours"><td>PoseBridge</td><td>55.6</td><td>38.3</td><td>28.6</td><td>26.4</td><td>52.3</td><td>39.6</td><td>32.9</td><td>32.1</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-note">* PURLS with multiple text prompts. PoseBridge uses a single text prompt in this comparison.</p>
+      <div class="result-panel" id="panel-random" role="tabpanel" aria-labelledby="tab-random" tabindex="0" hidden>
+        <div class="panel-title"><h3>Beyond a single class split</h3><span>Random Xsub splits · Paper Table 2</span></div><p class="panel-description">Average of three random seen/unseen splits. ZSL accuracy (%) and GZSL-H (%).</p>
+        <div class="table-wrap" role="region" aria-label="Random-split results, scroll horizontally for all benchmarks" tabindex="0"><table><caption class="sr-only">Random-split results on NTU60, NTU120, and PKU-MMD</caption><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">NTU60 · 55/5</th><th colspan="2" scope="colgroup">NTU120 · 110/10</th><th colspan="2" scope="colgroup">PKU-MMD · 46/5</th></tr><tr><th scope="col">ZSL</th><th scope="col">H</th><th scope="col">ZSL</th><th scope="col">H</th><th scope="col">ZSL</th><th scope="col">H</th></tr></thead><tbody><tr><th scope="row">SA-DVAE</th><td>84.2</td><td>75.3</td><td>50.7</td><td>47.5</td><td>66.5</td><td>54.7</td></tr><tr><th scope="row">SCoPLe</th><td>83.7</td><td>77.7</td><td>53.3</td><td>54.1</td><td>71.4</td><td>54.9</td></tr><tr><th scope="row">TDSM</th><td>88.9</td><td>—</td><td>69.5</td><td>—</td><td>70.8</td><td>—</td></tr><tr><th scope="row">FS-VAE</th><td>—</td><td>—</td><td>—</td><td>—</td><td>71.2</td><td>59.0</td></tr><tr class="ours"><th scope="row">PoseBridge</th><td>90.5</td><td>78.2</td><td>74.8</td><td>66.0</td><td>77.5</td><td>71.9</td></tr></tbody></table></div><p class="table-note">GZSL-H improves by 11.9 points on NTU120 and 12.9 points on PKU-MMD over the strongest compared baseline. Selected comparisons; full results are in the paper.</p>
       </div>
-
-      <div class="result-panel">
-        <div class="panel-title">
-          <h3>Accuracy × Efficiency</h3>
-          <span>NTU-RGB+D standard splits</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Method</th><th>NTU60 55/5</th><th>NTU60 48/12</th><th>NTU120 110/10</th><th>NTU120 96/24</th><th>GFLOPs</th><th>FPS</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Neuron</td><td>86.9</td><td>62.7</td><td>71.5</td><td>57.1</td><td>7.5</td><td>1165.4</td></tr>
-              <tr><td>TDSM</td><td>86.5</td><td>56.0</td><td>74.2</td><td>65.1</td><td>10.6</td><td>772.5</td></tr>
-              <tr><td>FS-VAE</td><td>86.9</td><td>57.2</td><td>74.4</td><td>62.5</td><td>3.7</td><td>1237.0</td></tr>
-              <tr><td>SKI-VLM</td><td>82.2</td><td>52.0</td><td>77.5</td><td>59.3</td><td>281.0</td><td>22.6</td></tr>
-              <tr class="ours"><td>PoseBridge</td><td>88.8</td><td>73.2</td><td>80.3</td><td>70.9</td><td>7.3</td><td>1398.0</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="result-panel" id="panel-efficiency" role="tabpanel" aria-labelledby="tab-efficiency" tabindex="0" hidden>
+        <div class="panel-title"><h3>Lightweight recognition</h3><span>ZSSAR stage only · Paper Table 4</span></div><p class="panel-description">Measured on one NVIDIA RTX A6000, including skeleton and text encoders. These are recognition-stage measurements after skeleton extraction, not end-to-end video throughput.</p>
+        <div class="table-wrap" role="region" aria-label="Recognition-stage efficiency results" tabindex="0"><table><caption class="sr-only">Recognition-stage computational cost and throughput</caption><thead><tr><th scope="col">Method</th><th scope="col">Trainable / total params (M)</th><th scope="col">GFLOPs ↓</th><th scope="col">FPS ↑</th></tr></thead><tbody><tr><th scope="row">Neuron</th><td>2.3 / 126.7</td><td>7.5</td><td>1165.4</td></tr><tr><th scope="row">TDSM</th><td>260.4 / 384.2</td><td>10.6</td><td>772.5</td></tr><tr><th scope="row">FS-VAE</th><td>0.2 / 64.4</td><td>3.7</td><td>1237.0</td></tr><tr><th scope="row">SKI-VLM</th><td>2.8 / 215.9</td><td>281.0</td><td>22.6</td></tr><tr class="ours"><th scope="row">PoseBridge</th><td>3.8 / 128.2</td><td>7.3</td><td>1398.0</td></tr></tbody></table></div><p class="table-note">Pose estimation and cue extraction incur additional cost. See Appendix D.3 for component-wise pipeline costs.</p>
       </div>
+      <div class="evaluation-note"><p><strong>ZSL:</strong> classify unseen actions only. <strong>GZSL:</strong> classify both seen and unseen actions; H balances their accuracies, H = 2SU / (S + U).</p><a href="assets/posebridge-paper.pdf#page=7" target="_blank" rel="noopener">Full experiments & ablations <span aria-hidden="true">↗</span></a></div>
     </section>
 
-    <section id="qualitative" class="section soft-bg">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">ANALYSIS</span>
-          <h2>What does PoseBridge recover?</h2>
-          <p>Pose-anchored features attend more strongly to action-relevant object and interaction regions, producing a more separable zero-shot feature space for motion-ambiguous actions.</p>
-        </div>
-        <figure class="wide-figure qualitative-figure">
-          <img src="https://arxiv.org/html/2605.11497v1/qualitative.png" alt="Qualitative comparison of baseline and PoseBridge using Grad-CAM and t-SNE" />
-          <figcaption>Example: <em>folding paper</em> vs. <em>typing on a keyboard</em>. The baseline feature space is highly mixed, while PoseBridge yields clearer class separation.</figcaption>
-        </figure>
+    <section id="analysis" class="section soft-bg">
+      <div class="container"><div class="section-heading"><span class="eyebrow">04 / A CLOSER LOOK</span><h2>Recover the cues that distinguish actions.</h2><p>“Folding paper” and “typing on a keyboard” can look similar in skeleton space. Pose-anchored cues provide evidence around the hands and manipulated objects.</p></div>
+        <figure class="wide-figure"><button class="figure-button" data-figure="assets/qualitative.png" data-title="Qualitative analysis: folding paper vs. typing" aria-label="Enlarge Figure 4: Grad-CAM and t-SNE analysis"><img src="assets/qualitative.png" width="1532" height="439" loading="lazy" alt="Baseline Grad-CAM attends broadly to the body and the two action classes overlap in t-SNE. PoseBridge attends around the hands, paper, and keyboard and shows clearer class separation."><span class="zoom-hint" aria-hidden="true">↗ Enlarge figure</span></button><figcaption><span class="figure-label">Figure 4</span> Grad-CAM and t-SNE visualizations from the paper. Red: folding paper. Blue: typing on a keyboard.</figcaption></figure>
+        <div class="analysis-observations"><p><span>ATTENTION</span><strong>From body localization to action-relevant regions.</strong> PoseBridge emphasizes hand-object interaction areas in these examples.</p><p><span>REPRESENTATION</span><strong>Clearer separation for motion-ambiguous actions.</strong> The illustrated zero-shot matching features are less mixed.</p></div>
+        <details class="scope-details"><summary>Scope and limitations <span aria-hidden="true">+</span></summary><p>PoseBridge assumes access to intermediate pose-estimation features during skeleton extraction, so it uses an HPE-aware protocol. Its cues can become unreliable under heavy occlusion, severe motion blur, pose estimation failures, or when objects are very small or outside the body-attended region. See Appendix G for the full discussion.</p></details>
       </div>
     </section>
 
     <section id="citation" class="section container narrow">
-      <h2>Citation</h2>
-      <p>If you find PoseBridge useful for your research, please cite our paper.</p>
-      <div class="codebox">
-        <button id="copyBib" type="button" aria-label="Copy BibTeX">Copy</button>
-<pre><code id="bibtex">@article{lee2026posebridge,
-  title   = {PoseBridge: Bridging the Skeletonization Gap for Zero-Shot Skeleton-Based Action Recognition},
-  author  = {Lee, Sanghyeon and Kim, Jinwoo and Lee, Jong Taek},
-  journal = {arXiv preprint arXiv:2605.11497},
-  year    = {2026}
-}</code></pre>
-      </div>
+      <div class="citation-heading"><div><span class="eyebrow">05 / CITE POSEBRIDGE</span><h2>Build on this work.</h2></div><a class="download-bib" href="assets/posebridge.bib" download>Download .bib <span aria-hidden="true">↓</span></a></div>
+      <p>If you find PoseBridge useful in your research, please cite our paper.</p>
+      <div class="codebox"><div class="codebox-bar"><span>BibTeX · NeurIPS 2026</span><button id="copyBib" type="button">Copy BibTeX</button></div><pre><code id="bibtex">@inproceedings{lee2026posebridge,
+  title     = {PoseBridge: Bridging the Skeletonization Gap for
+               Zero-Shot Skeleton-Based Action Recognition},
+  author    = {Lee, Sanghyeon and Kim, Jinwoo and Lee, Jong Taek},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  eprint    = {2605.11497},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2605.11497}
+}</code></pre></div><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+      <div class="closing-links"><a href="assets/posebridge-paper.pdf" target="_blank" rel="noopener">Read the paper ↗</a><a href="https://github.com/hyeon0819/PoseBridge" target="_blank" rel="noopener noreferrer">Follow the code release ↗</a></div>
     </section>
   </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <span>PoseBridge · NeurIPS 2026</span>
-      <span>Kyungpook National University</span>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <footer><div class="container footer-inner"><a class="brand" href="#top">PoseBridge<span class="footer-venue">NeurIPS 2026</span></a><span>Kyungpook National University</span><a href="#top">Back to top ↑</a></div></footer>
+  <dialog id="figure-dialog" aria-labelledby="figure-title"><div class="dialog-toolbar"><h2 id="figure-title">Figure</h2><button id="close-figure" type="button" aria-label="Close enlarged figure">Close <span aria-hidden="true">×</span></button></div><div class="dialog-image-wrap"><img id="dialog-image" alt=""></div><p class="dialog-note">Scroll to inspect. Press Escape to close. <a id="original-figure" target="_blank" rel="noopener">Open original ↗</a></p></dialog>
 </body>
 </html>
