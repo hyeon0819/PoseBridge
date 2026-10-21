@@ -15,6 +15,6 @@ Kyungpook National University, South Korea
 [![Project Page](https://img.shields.io/badge/Project%20Page-PoseBridge-2ea44f.svg)](https://hyeon0819.github.io/PoseBridge/)
 
 
-**TL;DR:** PoseBridge preserves action-relevant visual semantics during human pose estimation and bridges them to skeleton-text alignment, reducing semantic information lost during skeletonization without requiring an independent RGB action-recognition branch.
+**TL;DR:** Skeleton coordinates keep motion, but can lose the cues that tell actions apart. PoseBridge preserves those cues inside the pose estimator and carries them into zero-shot recognition.
 
 **Code will be released soon.**
