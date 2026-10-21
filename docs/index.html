@@ -36,6 +36,14 @@ dialog{width:min(1500px,96vw);max-width:96vw;max-height:94dvh;padding:0;border:1
 @media(max-width:370px){.nav-venue{display:none}h1{font-size:53px}.paper-title{font-size:23px}.authors{gap:6px 13px;font-size:14px}.paper-button{padding:0 10px}.lead-stat strong{font-size:42px}.result-summary{gap:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 
+
+/* PoseBridge visual mark: navigation + main project title */
+.brand-icon{display:block;width:68px;height:auto;flex:none;object-fit:contain}
+.hero-title{display:flex;align-items:center;justify-content:center;gap:18px}
+.hero-icon{display:block;width:clamp(110px,13vw,165px);height:auto;flex:none;object-fit:contain}
+.hero-title span{white-space:nowrap}
+@media(max-width:680px){.brand-icon{width:55px}.hero-title{gap:10px;font-size:clamp(34px,9vw,56px)}.hero-icon{width:clamp(76px,16vw,95px)}}
+@media(max-width:420px){.nav-venue{display:none}}
 </style>
   <title>PoseBridge | NeurIPS 2026</title>
 </head>
@@ -43,7 +51,7 @@ dialog{width:min(1500px,96vw);max-width:96vw;max-height:94dvh;padding:0;border:1
   <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav" aria-label="Primary navigation">
     <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="PoseBridge home"><svg width="27" height="27" viewBox="0 0 30 30" aria-hidden="true"><path d="M4 23V9m22 14V9M4 15c7 0 6-8 11-8s4 8 11 8M4 21h22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>PoseBridge<span class="nav-venue">NeurIPS ’26</span></a>
+      <a class="brand" href="#top" aria-label="PoseBridge home"><img class="brand-icon" src="assets/posebridge-logo.png" width="1216" height="515" alt="" aria-hidden="true">PoseBridge<span class="nav-venue">NeurIPS ’26</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu <span aria-hidden="true">☰</span></button>
       <div class="nav-links" id="nav-links"><a href="#problem">Problem</a><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#citation">Citation</a></div>
     </div>
@@ -51,7 +59,7 @@ dialog{width:min(1500px,96vw);max-width:96vw;max-height:94dvh;padding:0;border:1
   <main id="main">
     <header id="top" class="hero container">
       <div class="venue-pill"><span class="venue-dot" aria-hidden="true"></span> NeurIPS 2026</div>
-      <h1>PoseBridge</h1>
+      <h1 class="hero-title"><img class="hero-icon" src="assets/posebridge-logo.png" width="1216" height="515" alt="" aria-hidden="true"><span>PoseBridge</span></h1>
       <p class="paper-title">Bridging the Skeletonization Gap for<br class="desktop-break"> Zero-Shot Skeleton-Based Action Recognition</p>
       <div class="authors" aria-label="Authors">
         <a href="https://sites.google.com/view/sang-hyeon-lee" target="_blank" rel="noopener noreferrer">Sanghyeon Lee</a>
