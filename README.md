@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/posebridge-logo.png" alt="PoseBridge Logo" width="240">
+
 # PoseBridge: Bridging the Skeletonization Gap for <br>Zero-Shot Skeleton-Based Action Recognition
 
 [Sanghyeon Lee](https://sites.google.com/view/sang-hyeon-lee) &nbsp;&nbsp;&nbsp; [Jinwoo Kim](https://scholar.google.co.kr/citations?user=WdOolEsAAAAJ&hl=ko&oi=sra) &nbsp;&nbsp;&nbsp; [Jong Taek Lee](https://sites.google.com/view/k-vislab)†
