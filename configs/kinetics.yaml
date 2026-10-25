@@ -1,0 +1,12 @@
+_base_: default.yaml
+gzsl: false
+
+shiftgcn:
+  seed: 1
+  epochs: 85
+  batch_size: 64
+  test_batch_size: 128
+  lr: 0.1
+  steps: [50, 70]
+  warmup_epochs: 5
+  weight_decay: 1.0e-4

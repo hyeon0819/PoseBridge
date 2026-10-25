@@ -1,0 +1,12 @@
+_base_: ../default.yaml
+dataset: ntu120
+split: seen60_unseen60
+skeleton: data/skeleton/ntu120_xsub.npz
+features: data/features/ntu120_xsub_seen60_unseen60.npz
+pose_cues: data/pose_cues/ntu
+gzsl: false
+
+text_neighbor_k: 7
+
+inference:
+  zsl:  {beta: 1.0, gamma: 1.0, alpha: 0.8, neighbor_beta: 0.3, mt_weight: 0.0, csls_k: 10}

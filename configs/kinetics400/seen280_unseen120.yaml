@@ -1,0 +1,9 @@
+_base_: ../kinetics.yaml
+dataset: kinetics400
+split: seen280_unseen120
+skeleton: data/skeleton/kinetics400.npz
+features: data/features/kinetics400_seen280_unseen120.npz
+pose_cues: data/pose_cues/kinetics
+
+inference:
+  zsl:  {beta: 1.0, gamma: 1.0, alpha: 0.8, neighbor_beta: 0.3, mt_weight: 0.0, csls_k: 10}

@@ -1,0 +1,13 @@
+_base_: ../default.yaml
+dataset: ntu60
+split: seen48_unseen12
+skeleton: data/skeleton/ntu60_xview.npz
+features: data/features/ntu60_xview_seen48_unseen12.npz
+pose_cues: data/pose_cues/ntu
+gzsl: true
+
+multi_template_weight: 0.0
+
+inference:
+  zsl:  {beta: 1.0, gamma: 0.0, alpha: 0.4, neighbor_beta: 0.3, mt_weight: 0.0, csls_k: 10}
+  gzsl: {beta: 1.0, gamma: 0.0, alpha: 0.6, neighbor_beta: 0.3, mt_weight: 0.0, csls_k: 20, kappa: 0.425}

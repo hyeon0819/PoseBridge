@@ -1,0 +1,12 @@
+numpy==1.26.4
+scipy==1.15.3
+pyyaml==6.0.3
+tqdm==4.70.1
+yacs==0.1.8
+opencv-python==4.11.0.86
+open_clip_torch==3.3.0
+pycocotools==2.0.11
+json_tricks==3.17.3
+ultralytics==8.4.185
+lap==0.5.13
+huggingface_hub==2.3.0

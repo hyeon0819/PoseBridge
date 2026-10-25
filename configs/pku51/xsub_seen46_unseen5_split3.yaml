@@ -1,0 +1,13 @@
+_base_: ../default.yaml
+dataset: pku51
+split: seen46_unseen5_split3
+skeleton: data/skeleton/pku51_xsub.npz
+features: data/features/pku51_xsub_seen46_unseen5_split3.npz
+pose_cues: data/pose_cues/pku51
+gzsl: true
+
+text_neighbor_k: 3
+
+inference:
+  zsl:  {beta: 0.0, gamma: 1.0, alpha: 0.0, neighbor_beta: 0.0, mt_weight: 0.2, csls_k: 10}
+  gzsl: {beta: 1.0, gamma: 0.0, alpha: 0.4, neighbor_beta: 0.0, mt_weight: 0.2, csls_k: 20, kappa: 0.6}

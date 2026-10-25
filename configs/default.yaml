@@ -1,0 +1,61 @@
+# PoseBridge-ZSSAR 
+seed: 77
+epochs: 30
+batch_size: 128
+test_batch_size: 256
+lr: 1.0e-3
+min_lr: 1.0e-6
+weight_decay: 2.0e-3
+warmup_epochs: 5
+grad_clip: 1.0
+ema_decay: 0.999
+ema_start: 5
+feature_noise: 0.05
+
+# model
+ske_dim: 256
+pose_dim: 512
+embed_dim: 512
+dropout: 0.1
+bridge_heads: 4
+clip_model: ViT-L-14
+supcon_temp: 0.07
+distill_temp: 4.0
+
+# loss weights
+w_ske_cls: 1.0
+w_ske_sem: 1.5
+w_ske_con: 1.5
+w_pose_cls: 0.5
+w_pose_sem: 0.5
+w_pose_con: 0.3
+w_s2p: 0.3
+w_kd: 1.0
+w_bridge_sem: 1.0
+w_bridge_con: 0.5
+
+# semantic prototype adaptation
+rho: 0.2
+topk: 5
+
+# text prototypes
+text_neighbor_k: 5
+text_neighbor_beta: 0.3
+multi_template_weight: 0.1
+freeze_text: false
+
+# inference: query = beta * z_s + gamma * z_b + alpha * z_p
+inference:
+  zsl:  {beta: 1.0, gamma: 0.8, alpha: 0.8, neighbor_beta: 0.3, mt_weight: 0.0, csls_k: 20}
+  gzsl: {beta: 1.0, gamma: 0.4, alpha: 0.6, neighbor_beta: 0.2, mt_weight: 0.0, csls_k: 10, kappa: 0.65}
+
+# Shift-GCN pretraining on seen classes (tools/train_shiftgcn.py)
+shiftgcn:
+  seed: 1
+  epochs: 100
+  batch_size: 32
+  test_batch_size: 64
+  lr: 0.1
+  steps: [60, 80]
+  warmup_epochs: 0
+  weight_decay: 1.0e-4

@@ -1,0 +1,43 @@
+# PoseBridge-HPE: RTMPose-s + hierarchical refinement (L=3) + body-aware pooling
+SEED: 21
+WORKERS: 10
+
+DATASET:
+  ROOT: data/coco/
+  TRAIN_SET: train2017
+  TEST_SET: val2017
+  CLIP_TEXT_PREEXTRACT: true
+  CAPTION_INDEX: 0
+
+MODEL:
+  NAME: posebridge_hpe
+  SIZE: s
+  INIT_WEIGHTS: true
+  PRETRAINED: checkpoints/hpe/cspnext-s_udp-body7_210e-256x192-8c9ccbdb_20230504.pth
+  NUM_JOINTS: 17
+  IMAGE_SIZE: [192, 256]
+  BACKBONE:
+    DEEPEN_FACTOR: 0.33
+    WIDEN_FACTOR: 0.5
+    OUT_INDICES: [2, 3, 4]
+  HEAD:
+    IN_CHANNELS: 512
+  ROUTE:
+    NUM_SCALES: 3        # L
+    FIXED_GATE: 0.5      # alpha
+    PROJ_DIM: 512
+    DROPOUT: 0.1
+
+TRAIN:
+  LR: 0.004
+  WEIGHT_DECAY: 0.0
+  BATCH_SIZE_PER_GPU: 256
+  END_EPOCH: 420
+  STAGE2_EPOCH: 390
+  VAL_INTERVAL: 10
+  CLIP_LOSS_WEIGHT: 0.1  # lambda_hpe
+  CLIP_TEMPERATURE: 0.07
+  TEXT_ENCODER:
+    CLIP_MODEL: ViT-B-32
+    OPENCLIP_PRETRAINED: openai
+    PROJ_DIM: 512
