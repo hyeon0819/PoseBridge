@@ -88,7 +88,7 @@ Raw data:
 [Kinetics-400](https://github.com/cvdfoundation/kinetics-dataset) (`train/`, `val/`).
 RTMPose-s initialization:
 [cspnext-s_udp-body7_210e-256x192-8c9ccbdb_20230504.pth](https://download.openmmlab.com/mmpose/v1/projects/rtmposev1/cspnext-s_udp-body7_210e-256x192-8c9ccbdb_20230504.pth)
-→ `checkpoints/hpe/`. 
+→ `checkpoints/hpe/`. The RTMDet-nano person detector is downloaded to `checkpoints/hpe/` on first use.
 
 ```bash
 # (a) PoseBridge-HPE on COCO keypoints + captions

@@ -1,8 +1,13 @@
-"""YOLO11 person detection + tracking and per-dataset track post-processing."""
+"""Person detection + tracking (RTMDet-nano or YOLO11, ByteTrack) and per-dataset track post-processing."""
 from typing import Dict, List, Optional, Set, Tuple
 
+import cv2
 import numpy as np
 import torch
+
+from ..utils import resolve
+
+RTMDET_CKPT = resolve("checkpoints/hpe/rtmdet_nano_8xb32-100e_coco-obj365-person-05d8511e.pth")
 
 TWO_PERSON = {
     "ntu60": set(range(49, 60)),
@@ -15,15 +20,48 @@ def is_two_person_action(label, dataset):
     return label in TWO_PERSON.get(dataset, set())
 
 
-class PersonDetector:
-    """Ultralytics YOLO11 + ByteTrack/BoT-SORT; returns per-frame [N, 6] (x1, y1, x2, y2, score, track_id)."""
+def read_video(path, max_frames=0):
+    cap, frames = cv2.VideoCapture(path), []
+    while not max_frames or len(frames) < max_frames:
+        ok, f = cap.read()
+        if not ok:
+            break
+        frames.append(f)
+    cap.release()
+    return frames
 
-    def __init__(self, checkpoint="yolo11x.pt", device="cuda:0", score_thr=0.3, iou_thr=0.7, img_size=640):
-        from ultralytics import YOLO
-        self.model = YOLO(checkpoint)
+
+def bytetrack(dets, img_hw):
+    """Per-frame [N, 5] detections -> per-frame [N, 6] (x1, y1, x2, y2, score, track_id)."""
+    from ultralytics.engine.results import Boxes
+    from ultralytics.trackers.byte_tracker import BYTETracker
+    from ultralytics.utils import YAML, IterableSimpleNamespace
+    from ultralytics.utils.checks import check_yaml
+
+    tracker = BYTETracker(IterableSimpleNamespace(**YAML.load(check_yaml("bytetrack.yaml"))))
+    out = []
+    for d in dets:
+        boxes = Boxes(np.concatenate([d, np.zeros((len(d), 1), np.float32)], 1), img_hw)  # cls 0 = person
+        t = tracker.update(boxes)
+        out.append(t[:, [0, 1, 2, 3, 5, 4]].astype(np.float32) if len(t) else np.zeros((0, 6), np.float32))
+    return out
+
+
+class PersonDetector:
+    """Person detection (RTMDet-nano or YOLO11) + ByteTrack; per-frame [N, 6] (x1, y1, x2, y2, score, track_id)."""
+
+    def __init__(self, detector="rtmdet", checkpoint=None, device="cuda:0", score_thr=0.3, iou_thr=0.7,
+                 img_size=640):
+        self.detector = detector
         self.device, self.score_thr, self.iou_thr, self.img_size = device, score_thr, iou_thr, img_size
-        self.half = "cuda" in device and torch.cuda.is_available()
-        self._warm = False
+        if detector == "rtmdet":
+            from .rtmdet import RTMDetPerson
+            self.model = RTMDetPerson(checkpoint or RTMDET_CKPT, device, score_thr, iou_thr)
+        else:
+            from ultralytics import YOLO
+            self.model = YOLO(checkpoint or "yolo11x.pt")
+            self.half = "cuda" in device and torch.cuda.is_available()
+            self._warm = False
 
     def _warmup(self, tracker):
         if not self._warm:  # first-frame detections drop without a track() warmup
@@ -37,6 +75,13 @@ class PersonDetector:
     @torch.no_grad()
     def track(self, source, tracker="bytetrack", persist=True, batch=1, max_frames=0):
         """source: video path or list of BGR frames."""
+        if self.detector == "rtmdet":
+            frames = read_video(source, max_frames) if isinstance(source, str) else source
+            if not frames:
+                return []
+            dets = [d for i in range(0, len(frames), 64) for d in self.model(frames[i:i + 64])]
+            return bytetrack(dets, frames[0].shape[:2])
+
         self._warmup(tracker)
         out = []
         for i, r in enumerate(self.model.track(source=source, imgsz=self.img_size, conf=self.score_thr,
@@ -58,7 +103,6 @@ class PersonDetector:
         return out
 
 
-# ----- NTU / PKU: main-track selection with joint slot assignment -----
 def _iou(a: np.ndarray, b: np.ndarray) -> float:
     ix1 = max(float(a[0]), float(b[0])); iy1 = max(float(a[1]), float(b[1]))
     ix2 = min(float(a[2]), float(b[2])); iy2 = min(float(a[3]), float(b[3]))
@@ -237,7 +281,7 @@ def track_fill_by_main_tids_two_person(
     dup_iou_thr: float = 0.7,        # suppress duplicates if they collapse
 ) -> List[np.ndarray]:
     """
-    Offline post-processing for YOLO+ByteTrack outputs (per-frame [N,6]):
+    Offline post-processing for detector + ByteTrack outputs (per-frame [N,6]):
       - Pick main tids (K=1 or 2)
       - For each frame, jointly assign detections to K slots using nearest anchors
       - If frame has >=K detections: FORCE assign K detections (no "unassigned" among chosen K)

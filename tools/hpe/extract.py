@@ -39,7 +39,7 @@ def make_chunks(dataset, boxes, video_root, size):
             for cap in caps[i:i + max(1, size // 8)]:
                 names = sorted(by_capture[cap])
                 windows = [(n, boxes[n]["window_lo"], boxes[n]["window_hi"]) for n in names]
-                load = (lambda c=cap, w=windows: read_windows(os.path.join(video_root, f"{c}.avi"), w))
+                load = (lambda c=cap, w=windows: read_windows(os.path.join(video_root, "rgb", f"{c}.avi"), w))
                 items.append((names, load))
             yield items
         return
@@ -56,7 +56,7 @@ def make_chunks(dataset, boxes, video_root, size):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--dataset", required=True, choices=list(SETTINGS))
-    p.add_argument("--video-root", required=True)
+    p.add_argument("--video-root", required=True, help="same as tools/hpe/detect.py")
     p.add_argument("--box-dir", required=True, help="output of tools/hpe/detect.py")
     p.add_argument("--out-dir", required=True)
     p.add_argument("--config", default="configs/hpe/posebridge_rtmpose-s.yaml")

@@ -1,4 +1,4 @@
-"""Person detection + tracking (YOLO11x + ByteTrack) -> <out-dir>/bbox_results.pkl.
+"""Person detection + tracking (RTMDet-nano or YOLO11x, ByteTrack) -> <out-dir>/bbox_results.pkl.
 
 NTU / PKU keep the 1-2 main actors (label-aware); Kinetics keeps the top-5 tracks.
 """
@@ -58,14 +58,15 @@ def main():
     p.add_argument("--video-root", required=True, help="NTU: *_rgb.avi dir | PKU: root with rgb/, label/ | "
                                                         "Kinetics: root with train/, val/")
     p.add_argument("--out-dir", required=True)
-    p.add_argument("--model", default="yolo11x.pt")
+    p.add_argument("--detector", default="rtmdet", choices=["rtmdet", "yolo11"])
+    p.add_argument("--checkpoint", default=None, help="default: checkpoints/hpe/rtmdet_nano_*.pth | yolo11x.pt")
     p.add_argument("--part", default="1/1", help="shard k/n for multi-GPU runs")
     p.add_argument("--limit", type=int, default=0, help="debug: first N videos/captures")
     p.add_argument("--device", default="cuda:0")
     args = p.parse_args()
 
     thr, iou = THRESHOLDS[args.dataset]
-    det = PersonDetector(args.model, args.device, thr, iou)
+    det = PersonDetector(args.detector, args.checkpoint, args.device, thr, iou)
     k, n = map(int, args.part.split("/"))
     results, ds = {}, args.dataset
 
