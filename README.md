@@ -37,7 +37,7 @@ Download them into the repository root; the folder layout is kept.
 
 | Path | Content | Size | Used by |
 |---|---|---|---|
-| `checkpoints/zssar/` | PoseBridge-ZSSAR and its training log, one per config | 0.6 GB | test |
+| `checkpoints/zssar/` | PoseBridge-ZSSAR, one per config | 0.6 GB | test |
 | `data/features/` | Shift-GCN features, one per config | 3.3 GB | test, ZSSAR training |
 | `data/pose_cues/` | pose-anchored cues (16 per video) | 14 GB | test, ZSSAR training |
 | `checkpoints/hpe/` | PoseBridge-HPE | 37 MB | pose / cue extraction |
